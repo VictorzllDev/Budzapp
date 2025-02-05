@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:alpine
+    container_name: budzapp_postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: budzapp_db
+    volumes:
+      - budzapp_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  budzapp_postgres_data:
