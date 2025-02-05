@@ -12,6 +12,7 @@ export interface IAuthResponse {
 export interface IAuthUseCase {
 	register(data: IAuthRequest): Promise<void>
 	login(data: IAuthRequest): Promise<IAuthResponse>
+	validateToken(token: string | undefined): Promise<void>
 }
 
 export interface IAuthRepository {

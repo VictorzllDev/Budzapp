@@ -29,4 +29,16 @@ export function authRoutes(app: FastifyInstance) {
 			reply.status(500).send(error)
 		}
 	})
+
+	app.get('/validate', async (req, reply) => {
+		const token = req.headers.authorization?.split(' ')[1]
+
+		try {
+			const result = await authUseCase.validateToken(token)
+			reply.status(200).send(result)
+		} catch (error) {
+			console.log(error)
+			reply.status(500).send(error)
+		}
+	})
 }

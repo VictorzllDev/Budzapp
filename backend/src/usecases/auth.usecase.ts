@@ -1,4 +1,6 @@
 import { compare, hash } from 'bcrypt'
+import { sign } from 'jsonwebtoken'
+import { env } from '../env'
 import type {
 	IAuthRepository,
 	IAuthRequest,
@@ -6,8 +8,7 @@ import type {
 	IAuthUseCase,
 } from '../types/auth.types'
 import { isValidEmail } from '../utils/email-validator.util'
-import { sign } from 'jsonwebtoken'
-import { env } from '../env'
+import { validateTokenUtil } from '../utils/validate-token.util'
 
 export class AuthUseCase implements IAuthUseCase {
 	constructor(private authRepository: IAuthRepository) {}
@@ -50,5 +51,13 @@ export class AuthUseCase implements IAuthUseCase {
 		})
 
 		return { token }
+	}
+
+	async validateToken(token: string | undefined): Promise<void> {
+		if (!token) {
+			throw new Error('Token not provided')
+		}
+
+		validateTokenUtil(token)
 	}
 }
