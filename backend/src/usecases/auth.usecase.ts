@@ -1,10 +1,13 @@
-import { hash } from 'bcrypt'
+import { compare, hash } from 'bcrypt'
 import type {
 	IAuthRepository,
 	IAuthRequest,
+	IAuthResponse,
 	IAuthUseCase,
 } from '../types/auth.types'
 import { isValidEmail } from '../utils/email-validator.util'
+import { sign } from 'jsonwebtoken'
+import { env } from '../env'
 
 export class AuthUseCase implements IAuthUseCase {
 	constructor(private authRepository: IAuthRepository) {}
@@ -29,5 +32,23 @@ export class AuthUseCase implements IAuthUseCase {
 		password = passwordHash
 
 		this.authRepository.save({ email, password })
+	}
+
+	async login({ email, password }: IAuthRequest): Promise<IAuthResponse> {
+		if (!email || !password) {
+			throw new Error('Email and password are required')
+		}
+
+		const user = await this.authRepository.findByEmail(email)
+		if (!user) throw new Error('User not found')
+
+		const isPasswordValid = await compare(password, user.password)
+		if (!isPasswordValid) throw new Error('Invalid password')
+
+		const token = sign({ id: user.id }, env.JWT_SECRET_KEY, {
+			expiresIn: '1d',
+		})
+
+		return { token }
 	}
 }

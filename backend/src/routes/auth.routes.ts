@@ -17,4 +17,16 @@ export function authRoutes(app: FastifyInstance) {
 			reply.status(500).send(error)
 		}
 	})
+
+	app.post<{ Body: IAuthRequest }>('/login', async (req, reply) => {
+		const { email, password } = req.body
+
+		try {
+			const result = await authUseCase.login({ email, password })
+			reply.status(200).send(result)
+		} catch (error) {
+			console.log(error)
+			reply.status(500).send(error)
+		}
+	})
 }

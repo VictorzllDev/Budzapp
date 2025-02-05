@@ -11,6 +11,7 @@ export interface IAuthResponse {
 
 export interface IAuthUseCase {
 	register(data: IAuthRequest): Promise<void>
+	login(data: IAuthRequest): Promise<IAuthResponse>
 }
 
 export interface IAuthRepository {
