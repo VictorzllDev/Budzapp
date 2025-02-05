@@ -12,42 +12,42 @@ O MVP focará nas funcionalidades essenciais para testar a viabilidade do projet
 
 ### ✅ Funcionalidades do MVP
 
-- **Autenticação de Usuários:** Autenticação via Firebase Authentication para garantir segurança e controle no cadastro de produtos.
+- **Autenticação de Usuários:** Sistema de autenticação JWT (JSON Web Tokens) para segurança e controle no cadastro de produtos.
 - **Cadastro de Produtos:** Permite que os usuários cadastrados adicionem produtos com nome, preço e imagem, diretamente vinculados à sua conta.
 - **Criação de Orçamentos:** Clientes selecionam produtos e quantidades sem necessidade de login. O preço é oculto até o momento da geração do orçamento.
 - **Cálculo Automático:** O sistema calcula o valor total do orçamento com base nas quantidades selecionadas, solicitando o número de WhatsApp do cliente antes de enviar o orçamento.
 - **Geração de PDF:** O orçamento é gerado e salvo como um arquivo PDF.
-- **Envio via WhatsApp:** O orçamento é enviado diretamente ao WhatsApp do cliente, garantindo um canal de comunicação.
+- **Envio via WhatsApp:** O orçamento é enviado diretamente ao WhatsApp do cliente através de integração com API, garantindo um canal de comunicação.
 
 ### ❌ Funcionalidades Futuras (Pós-MVP)
 
-- Controle de estoque em tempo real.
-- Relatórios e análise de dados de orçamentos.
-- Integração com a API do WhatsApp Business para automação e personalização de mensagens.
+- Controle de estoque em tempo real
+- Relatórios e análise de dados de orçamentos
+- Integração avançada com API do WhatsApp Business para automação e personalização de mensagens
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Frontend:** React, Vite, Mantine.
-- **Backend:** Fastify (ou Firebase Functions inicialmente).
-- **Banco de Dados:** Firebase Firestore.
-- **Autenticação:** Firebase Authentication.
-- **Geração de PDF:** pdfmake ou jsPDF.
-- **Envio de WhatsApp:** Empresas conectam seu WhatsApp através de uma integração com uma biblioteca de bot de WhatsApp para enviar os orçamentos em PDF diretamente aos clientes.
+- **Frontend:** React + Vite + Mantine
+- **Backend:** Node.js + TypeScript + Fastify
+- **Banco de Dados:** PostgreSQL + Prisma ORM
+- **Autenticação:** JWT (JSON Web Tokens)
+- **Geração de PDF:** pdfmake ou jsPDF
+- **Integração WhatsApp:** Biblioteca de bot de WhatsApp (ex: whatsapp-web.js ou Twilio API)
 
 ## 📅 Organização do Desenvolvimento
 
-Como o desenvolvimento será realizado de forma independente, o uso de **GitHub Projects** será essencial para manter o foco e a organização. Com essa ferramenta, será possível:
+O uso de **GitHub Projects** será essencial para manter o foco e a organização:
 
-- **Organizar Tarefas:** Criar e organizar as tarefas diretamente no repositório, utilizando quadros Kanban.
-- **Acompanhar o Progresso:** Visualizar o status das tarefas e acompanhar o andamento do projeto de forma prática.
-- **Automatizar Fluxos:** Usar automações simples para mover tarefas entre os estágios, como "A Fazer", "Em Progresso", e "Concluído".
+- **Organizar Tarefas:** Quadros Kanban integrados ao repositório
+- **Acompanhar Progresso:** Visualização clara do status das tarefas
+- **Automatizar Fluxos:** Movimento automático de tarefas entre "A Fazer", "Em Progresso" e "Concluído"
 
 ## 📌 Metodologia de Desenvolvimento
 
-A metodologia ágil será aplicada com base no fluxo Kanban, dado que o projeto será desenvolvido de forma solo:
+Metodologia ágil com fluxo Kanban adaptado para desenvolvimento solo:
 
-1. **Planejamento:** Definir as tarefas principais e objetivos no Notion/Trello.
-2. **Desenvolvimento:** Implementar as funcionalidades essenciais do MVP.
-3. **Testes:** Validar as funcionalidades em ciclos rápidos de testes.
-4. **Lançamento do MVP:** Coletar feedback dos usuários iniciais.
-5. **Melhorias:** Ajustes baseados no feedback obtido após o lançamento.
+1. **Planejamento:** Definição de tarefas e objetivos no GitHub Projects
+2. **Desenvolvimento:** Implementação priorizando funcionalidades críticas do MVP
+3. **Testes:** Ciclos rápidos de validação das funcionalidades
+4. **Lançamento do MVP:** Coleta de feedback dos primeiros usuários
+5. **Iterações:** Melhorias contínuas baseadas em métricas e feedback
