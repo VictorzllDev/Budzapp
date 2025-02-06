@@ -37,8 +37,10 @@ export function Login() {
 		termsOfService: boolean
 	}) => {
 		try {
-			const result = await loginAuth({ email, password })
-			console.log(result)
+			const { token } = await loginAuth({ email, password })
+
+			sessionStorage.removeItem('token')
+			sessionStorage.setItem('token', token)
 		} catch (error) {
 			console.error(handleApiErrorUtil(error))
 		}
