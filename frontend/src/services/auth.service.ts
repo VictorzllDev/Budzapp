@@ -28,3 +28,8 @@ export async function loginAuth({ email, password }: ILoginRequest) {
 
 	return result.data
 }
+
+// Validate Token - validate
+export async function validateTokenAuth() {
+	await apiClientService.get('/auth/validate')
+}
