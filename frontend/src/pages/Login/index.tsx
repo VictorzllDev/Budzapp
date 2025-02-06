@@ -10,10 +10,11 @@ import {
 	TextInput,
 	Title,
 } from '@mantine/core'
-import classes from './style.module.css'
 import { useForm } from '@mantine/form'
-import { handleApiErrorUtil } from '../../utils/error-handler.util'
+import { notifications } from '@mantine/notifications'
 import { loginAuth } from '../../services/auth.service'
+import { handleApiErrorUtil } from '../../utils/error-handler.util'
+import classes from './style.module.css'
 
 export function Login() {
 	const form = useForm({
@@ -41,8 +42,14 @@ export function Login() {
 
 			sessionStorage.removeItem('token')
 			sessionStorage.setItem('token', token)
+
+			notifications.show({
+				title: 'Sucesso',
+				message: 'Login realizado com sucesso',
+				color: 'green',
+			})
 		} catch (error) {
-			console.error(handleApiErrorUtil(error))
+			handleApiErrorUtil(error)
 		}
 	}
 

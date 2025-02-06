@@ -1,6 +1,6 @@
+import { notifications } from '@mantine/notifications'
 import { createContext, useEffect, useState } from 'react'
 import { validateTokenAuth } from '../services/auth.service'
-import { handleApiErrorUtil } from '../utils/error-handler.util'
 
 interface AuthContextType {
 	isAuthenticated: boolean
@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				await validateTokenAuth()
 				setIsAuthenticated(true)
 			} catch (error) {
-				console.error(handleApiErrorUtil(error))
 				sessionStorage.removeItem('token')
 				setIsAuthenticated(false)
 			} finally {
@@ -34,6 +33,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const logout = () => {
 		sessionStorage.removeItem('token')
 		setIsAuthenticated(false)
+		notifications.show({
+			title: 'Sucesso',
+			message: 'Logout realizado com sucesso',
+			color: 'green',
+		})
 	}
 
 	return (

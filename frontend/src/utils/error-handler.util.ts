@@ -1,3 +1,5 @@
+import { notifications } from '@mantine/notifications'
+
 export function handleApiErrorUtil(error: unknown) {
 	if (
 		error &&
@@ -10,8 +12,16 @@ export function handleApiErrorUtil(error: unknown) {
 		typeof error.response.data === 'object' &&
 		'message' in error.response.data
 	) {
-		return error.response.data.message
+		const errorMessage = (error as { response: { data: { message: string } } })
+			.response.data.message
+		return notifications.show({
+			color: 'red',
+			title: 'Error',
+			message: errorMessage,
+		})
 	}
 
-	return 'Ocorreu um erro inesperado. Tente novamente.'
+	notifications.show({
+		message: 'Ocorreu um erro inesperado. Tente novamente.',
+	})
 }

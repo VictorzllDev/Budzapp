@@ -12,6 +12,7 @@ import { useForm } from '@mantine/form'
 import { registerAuth } from '../../services/auth.service'
 import classes from './style.module.css'
 import { handleApiErrorUtil } from '../../utils/error-handler.util'
+import { notifications } from '@mantine/notifications'
 
 export function Register() {
 	const form = useForm({
@@ -34,8 +35,12 @@ export function Register() {
 	}: { email: string; password: string }) => {
 		try {
 			await registerAuth({ email, password })
+			notifications.show({
+				message: 'Conta criada com sucesso!',
+				color: 'green',
+			})
 		} catch (error) {
-			console.error(handleApiErrorUtil(error))
+			handleApiErrorUtil(error)
 		}
 	}
 
