@@ -11,12 +11,14 @@ import {
 	Title,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { notifications } from '@mantine/notifications'
-import { loginAuth } from '../../services/auth.service'
+import { useAuth } from '../../hooks/useAuth'
 import { handleApiErrorUtil } from '../../utils/error-handler.util'
 import classes from './style.module.css'
+import { Link } from 'react-router'
 
 export function Login() {
+	const { login } = useAuth()
+
 	const form = useForm({
 		mode: 'uncontrolled',
 		initialValues: {
@@ -38,16 +40,7 @@ export function Login() {
 		termsOfService: boolean
 	}) => {
 		try {
-			const { token } = await loginAuth({ email, password })
-
-			sessionStorage.removeItem('token')
-			sessionStorage.setItem('token', token)
-
-			notifications.show({
-				title: 'Sucesso',
-				message: 'Login realizado com sucesso',
-				color: 'green',
-			})
+			await login({ email, password })
 		} catch (error) {
 			handleApiErrorUtil(error)
 		}
@@ -61,7 +54,7 @@ export function Login() {
 			<Text c="dimmed" size="sm" ta="center" mt={5}>
 				Ainda não tem uma conta?{' '}
 				<Anchor size="sm" component="button">
-					Criar uma conta
+					<Link to="/register">Criar uma conta</Link>
 				</Anchor>
 			</Text>
 

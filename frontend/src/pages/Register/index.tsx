@@ -9,12 +9,15 @@ import {
 	Title,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { registerAuth } from '../../services/auth.service'
-import classes from './style.module.css'
-import { handleApiErrorUtil } from '../../utils/error-handler.util'
 import { notifications } from '@mantine/notifications'
+import { Link, useNavigate } from 'react-router'
+import { registerAuth } from '../../services/auth.service'
+import { handleApiErrorUtil } from '../../utils/error-handler.util'
+import classes from './style.module.css'
 
 export function Register() {
+	const navigate = useNavigate()
+
 	const form = useForm({
 		mode: 'uncontrolled',
 		initialValues: {
@@ -35,6 +38,9 @@ export function Register() {
 	}: { email: string; password: string }) => {
 		try {
 			await registerAuth({ email, password })
+
+			navigate('/login')
+
 			notifications.show({
 				message: 'Conta criada com sucesso!',
 				color: 'green',
@@ -52,7 +58,7 @@ export function Register() {
 			<Text c="dimmed" size="sm" ta="center" mt={5}>
 				Já tem uma conta?{' '}
 				<Anchor size="sm" component="button">
-					Login
+					<Link to="/login">Login</Link>
 				</Anchor>
 			</Text>
 

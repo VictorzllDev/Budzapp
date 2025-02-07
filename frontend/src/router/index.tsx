@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import { createBrowserRouter, Navigate } from 'react-router'
+import { createBrowserRouter } from 'react-router'
 import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
-import ProtectedRoute from './ProtectedRoute'
+import { ProtectedRoute } from './ProtectedRoute'
+import { RedirectIfLoggedIn } from './RedirectIfLoggedIn'
 
 export const router = createBrowserRouter([
 	{
@@ -15,11 +15,11 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/register',
-				element: <Register />,
+				element: <RedirectIfLoggedIn element={<Register />} />,
 			},
 			{
 				path: '/login',
-				element: <Login />,
+				element: <RedirectIfLoggedIn element={<Login />} />,
 			},
 		],
 	},
