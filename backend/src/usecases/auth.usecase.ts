@@ -26,8 +26,8 @@ export class AuthUseCase implements IAuthUseCase {
 			throw new Error('Password must be at least 6 characters')
 		}
 
-		const existingUser = await this.authRepository.findByEmail(email)
-		if (existingUser) throw new Error('User already exists')
+		const existingCompany = await this.authRepository.findByEmail(email)
+		if (existingCompany) throw new Error('Company already exists')
 
 		const passwordHash = await hash(password, 8)
 		password = passwordHash
@@ -40,13 +40,13 @@ export class AuthUseCase implements IAuthUseCase {
 			throw new Error('Email and password are required')
 		}
 
-		const user = await this.authRepository.findByEmail(email)
-		if (!user) throw new Error('User not found')
+		const company = await this.authRepository.findByEmail(email)
+		if (!company) throw new Error('Company not found')
 
-		const isPasswordValid = await compare(password, user.password)
+		const isPasswordValid = await compare(password, company.password)
 		if (!isPasswordValid) throw new Error('Invalid password')
 
-		const token = sign({ id: user.id }, env.JWT_SECRET_KEY, {
+		const token = sign({ id: company.id }, env.JWT_SECRET_KEY, {
 			expiresIn: '1d',
 		})
 
