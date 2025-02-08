@@ -1,4 +1,4 @@
-import type { IUser } from './user.types'
+import type { ICompany } from './company.types'
 
 export interface IAuthRequest {
 	email: string
@@ -16,6 +16,6 @@ export interface IAuthUseCase {
 }
 
 export interface IAuthRepository {
-	findByEmail(email: string): Promise<IUser | null>
+	findByEmail(email: string): Promise<ICompany | null>
 	save(data: IAuthRequest): Promise<void>
 }
