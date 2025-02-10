@@ -1,8 +1,8 @@
 import type { FastifyInstance } from 'fastify'
-import { validateTokenMiddleware } from '../middlewares/validate-token.middleware'
 import z from 'zod'
-import { ProductUseCase } from '../usecases/product.usecase'
+import { validateTokenMiddleware } from '../middlewares/validate-token.middleware'
 import { ProductRepository } from '../repositories/product.repository'
+import { ProductUseCase } from '../usecases/product.usecase'
 
 const productUseCase = new ProductUseCase(new ProductRepository())
 
@@ -48,8 +48,8 @@ export function productRoutes(app: FastifyInstance) {
 			const { id } = paramsSchema.parse(req.params)
 			const companyId = req.company.id
 
-			await productUseCase.deleteById(id, companyId)
-			reply.code(204).send()
+			const result = await productUseCase.deleteById(id, companyId)
+			reply.code(204).send(result)
 		} catch (error) {
 			console.log(error)
 			reply.status(500).send(error)

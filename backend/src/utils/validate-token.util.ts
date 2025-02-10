@@ -6,6 +6,6 @@ export function validateTokenUtil(token: string) {
 		const decoded = verify(token, env.JWT_SECRET_KEY)
 		return decoded
 	} catch (error) {
-		throw new Error('Invalid or expired token')
+		throw new Error('Token inválido ou expirado')
 	}
 }

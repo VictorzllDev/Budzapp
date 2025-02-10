@@ -4,7 +4,11 @@ import { prisma } from '../utils/prisma-client.util'
 
 export class AuthRepository implements IAuthRepository {
 	async findByEmail(email: string): Promise<ICompany | null> {
-		return await prisma.company.findUnique({ where: { email } })
+		return await prisma.company.findUnique({
+			where: {
+				email,
+			},
+		})
 	}
 
 	async save({ email, password }: IAuthRequest): Promise<void> {
