@@ -1,12 +1,17 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { v4 as uuid } from 'uuid'
-import type { ProductRepository } from '../repositories/product.repository'
-import type { ICreateProductRequest, ICreateProductResponse, IProduct, IProductUseCase } from '../types/product.types'
+import type {
+	ICreateProductRequest,
+	ICreateProductResponse,
+	IProduct,
+	IProductRepository,
+	IProductUseCase,
+} from '../types/product.types'
 import { r2 } from '../utils/cloudflare-client.util'
 
 export class ProductUseCase implements IProductUseCase {
-	constructor(private productRepository: ProductRepository) {}
+	constructor(private productRepository: IProductRepository) {}
 
 	async create({
 		name,
@@ -41,7 +46,18 @@ export class ProductUseCase implements IProductUseCase {
 		}
 	}
 
-	async getAllByCompanyId(companyId: string): Promise<Omit<IProduct, 'Company'>[]> {
+	async getAllByCompanyId(companyId: string): Promise<IProduct[]> {
 		return await this.productRepository.getAllByCompanyId(companyId)
+	}
+
+	async deleteById(id: string, companyId: string): Promise<void> {
+		const product = await this.productRepository.getById(id)
+		if (!product) throw new Error('Produto não encontrado')
+
+		if (product.companyId !== companyId) {
+			throw new Error('Você não está autorizado a excluir este produto')
+		}
+
+		await this.productRepository.deleteById(id)
 	}
 }

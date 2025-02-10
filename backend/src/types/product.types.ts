@@ -8,7 +8,7 @@ export interface IProduct {
 	filePath: string
 	createdAt: Date
 	updatedAt: Date
-	Company: ICompany
+	Company?: ICompany
 	companyId: string
 }
 
@@ -25,18 +25,19 @@ export interface ICreateProductRequestRepository extends Omit<ICreateProductRequ
 }
 
 export interface ICreateProductResponse {
-	product: Omit<IProduct, 'Company'>
+	product: IProduct
 	signedUrl: string
 }
 
-export interface ICreateProductResponseRepository extends Omit<IProduct, 'Company'> {}
-
 export interface IProductUseCase {
 	create(data: ICreateProductRequest): Promise<ICreateProductResponse>
-	getAllByCompanyId(companyId: string): Promise<Omit<IProduct, 'Company'>[]>
+	getAllByCompanyId(companyId: string): Promise<IProduct[]>
+	deleteById(id: string, companyId: string): Promise<void>
 }
 
 export interface IProductRepository {
-	save(data: ICreateProductRequestRepository): Promise<ICreateProductResponseRepository>
-	getAllByCompanyId(companyId: string): Promise<Omit<IProduct, 'Company'>[]>
+	save(data: ICreateProductRequestRepository): Promise<IProduct>
+	getAllByCompanyId(companyId: string): Promise<IProduct[]>
+	deleteById(id: string): Promise<void>
+	getById(id: string): Promise<IProduct | null>
 }
