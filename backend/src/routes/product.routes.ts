@@ -7,9 +7,7 @@ import { ProductRepository } from '../repositories/product.repository'
 const productUseCase = new ProductUseCase(new ProductRepository())
 
 export function productRoutes(app: FastifyInstance) {
-	app.addHook('preHandler', validateTokenMiddleware)
-
-	app.post('/', async (req, reply) => {
+	app.post('/', { preHandler: validateTokenMiddleware }, async (req, reply) => {
 		try {
 			const productBodySchema = z.object({
 				name: z.string(),
@@ -21,6 +19,21 @@ export function productRoutes(app: FastifyInstance) {
 			const body = productBodySchema.parse(req.body)
 			const result = await productUseCase.create(body)
 			reply.status(201).send(result)
+		} catch (error) {
+			console.log(error)
+			reply.status(500).send(error)
+		}
+	})
+
+	app.get('/:companyId', async (req, reply) => {
+		try {
+			const paramsSchema = z.object({
+				companyId: z.string(),
+			})
+			const { companyId } = paramsSchema.parse(req.params)
+
+			const result = await productUseCase.getAllByCompanyId(companyId)
+			reply.status(200).send(result)
 		} catch (error) {
 			console.log(error)
 			reply.status(500).send(error)

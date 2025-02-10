@@ -33,8 +33,10 @@ export interface ICreateProductResponseRepository extends Omit<IProduct, 'Compan
 
 export interface IProductUseCase {
 	create(data: ICreateProductRequest): Promise<ICreateProductResponse>
+	getAllByCompanyId(companyId: string): Promise<Omit<IProduct, 'Company'>[]>
 }
 
 export interface IProductRepository {
 	save(data: ICreateProductRequestRepository): Promise<ICreateProductResponseRepository>
+	getAllByCompanyId(companyId: string): Promise<Omit<IProduct, 'Company'>[]>
 }

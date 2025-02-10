@@ -2,7 +2,7 @@ import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { v4 as uuid } from 'uuid'
 import type { ProductRepository } from '../repositories/product.repository'
-import type { ICreateProductRequest, ICreateProductResponse, IProductUseCase } from '../types/product.types'
+import type { ICreateProductRequest, ICreateProductResponse, IProduct, IProductUseCase } from '../types/product.types'
 import { r2 } from '../utils/cloudflare-client.util'
 
 export class ProductUseCase implements IProductUseCase {
@@ -39,5 +39,9 @@ export class ProductUseCase implements IProductUseCase {
 			product,
 			signedUrl,
 		}
+	}
+
+	async getAllByCompanyId(companyId: string): Promise<Omit<IProduct, 'Company'>[]> {
+		return await this.productRepository.getAllByCompanyId(companyId)
 	}
 }
