@@ -12,7 +12,7 @@ export interface IProduct {
 	companyId: string
 }
 
-export interface IProductRequest {
+export interface ICreateProductRequest {
 	name: string
 	description: string
 	price: number
@@ -20,20 +20,21 @@ export interface IProductRequest {
 	companyId: string
 }
 
-export interface IProductRequestRepository extends Omit<IProductRequest, 'contentType'> {
+export interface ICreateProductRequestRepository extends Omit<ICreateProductRequest, 'contentType'> {
 	filePath: string
 }
 
-export interface IProductResponse {
+export interface ICreateProductResponse {
 	product: Omit<IProduct, 'Company'>
 	signedUrl: string
 }
-export interface IProductResponseRepository extends Omit<IProduct, 'Company'> {}
+
+export interface ICreateProductResponseRepository extends Omit<IProduct, 'Company'> {}
 
 export interface IProductUseCase {
-	create(data: IProductRequest): Promise<IProductResponse>
+	create(data: ICreateProductRequest): Promise<ICreateProductResponse>
 }
 
 export interface IProductRepository {
-	save(data: IProductRequestRepository): Promise<IProductResponseRepository>
+	save(data: ICreateProductRequestRepository): Promise<ICreateProductResponseRepository>
 }

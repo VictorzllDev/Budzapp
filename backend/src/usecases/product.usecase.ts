@@ -2,13 +2,19 @@ import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { v4 as uuid } from 'uuid'
 import type { ProductRepository } from '../repositories/product.repository'
-import type { IProductRequest, IProductResponse, IProductUseCase } from '../types/product.types'
+import type { ICreateProductRequest, ICreateProductResponse, IProductUseCase } from '../types/product.types'
 import { r2 } from '../utils/cloudflare-client.util'
 
 export class ProductUseCase implements IProductUseCase {
 	constructor(private productRepository: ProductRepository) {}
 
-	async create({ name, description, price, contentType, companyId }: IProductRequest): Promise<IProductResponse> {
+	async create({
+		name,
+		description,
+		price,
+		contentType,
+		companyId,
+	}: ICreateProductRequest): Promise<ICreateProductResponse> {
 		const filePath = `products/${companyId}/${uuid()}-${name}.${contentType.split('/')[1]}`
 
 		const signedUrl = await getSignedUrl(

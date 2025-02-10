@@ -1,4 +1,8 @@
-import type { IProductRepository, IProductRequestRepository, IProductResponseRepository } from '../types/product.types'
+import type {
+	IProductRepository,
+	ICreateProductRequestRepository,
+	ICreateProductResponseRepository,
+} from '../types/product.types'
 import { prisma } from '../utils/prisma-client.util'
 
 export class ProductRepository implements IProductRepository {
@@ -8,7 +12,7 @@ export class ProductRepository implements IProductRepository {
 		price,
 		filePath,
 		companyId,
-	}: IProductRequestRepository): Promise<IProductResponseRepository> {
+	}: ICreateProductRequestRepository): Promise<ICreateProductResponseRepository> {
 		return await prisma.product.create({
 			data: {
 				name,
