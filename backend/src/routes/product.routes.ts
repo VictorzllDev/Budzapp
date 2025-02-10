@@ -14,10 +14,9 @@ export function productRoutes(app: FastifyInstance) {
 				description: z.string(),
 				price: z.number(),
 				contentType: z.string().regex(/image\/(png|jpg|jpeg)/),
-				companyId: z.string(),
 			})
-			const body = productBodySchema.parse(req.body)
-			const result = await productUseCase.create(body)
+			const { name, description, price, contentType } = productBodySchema.parse(req.body)
+			const result = await productUseCase.create({ name, description, price, contentType, companyId: req.company.id })
 			reply.status(201).send(result)
 		} catch (error) {
 			console.log(error)

@@ -1,5 +1,9 @@
 import type { ICompany } from './company.types'
 
+export interface IPayloadJWT {
+	companyId: string
+}
+
 export interface IAuthRequest {
 	email: string
 	password: string
