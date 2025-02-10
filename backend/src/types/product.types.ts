@@ -20,8 +20,7 @@ export interface IProductRequest {
 	companyId: string
 }
 
-export interface IProductRequestRepository
-	extends Omit<IProductRequest, 'contentType'> {
+export interface IProductRequestRepository extends Omit<IProductRequest, 'contentType'> {
 	filePath: string
 }
 

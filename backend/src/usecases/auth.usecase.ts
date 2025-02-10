@@ -1,12 +1,7 @@
 import { compare, hash } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import { env } from '../env'
-import type {
-	IAuthRepository,
-	IAuthRequest,
-	IAuthResponse,
-	IAuthUseCase,
-} from '../types/auth.types'
+import type { IAuthRepository, IAuthRequest, IAuthResponse, IAuthUseCase } from '../types/auth.types'
 import { isValidEmail } from '../utils/email-validator.util'
 import { validateTokenUtil } from '../utils/validate-token.util'
 

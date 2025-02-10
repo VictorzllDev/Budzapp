@@ -1,8 +1,4 @@
-import type {
-	IProductRepository,
-	IProductRequestRepository,
-	IProductResponseRepository,
-} from '../types/product.types'
+import type { IProductRepository, IProductRequestRepository, IProductResponseRepository } from '../types/product.types'
 import { prisma } from '../utils/prisma-client.util'
 
 export class ProductRepository implements IProductRepository {

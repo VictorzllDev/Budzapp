@@ -1,15 +1,7 @@
-import type {
-	FastifyReply,
-	FastifyRequest,
-	HookHandlerDoneFunction,
-} from 'fastify'
+import type { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import { validateTokenUtil } from '../utils/validate-token.util'
 
-export function validateTokenMiddleware(
-	req: FastifyRequest,
-	reply: FastifyReply,
-	done: HookHandlerDoneFunction,
-) {
+export function validateTokenMiddleware(req: FastifyRequest, reply: FastifyReply, done: HookHandlerDoneFunction) {
 	const token = req.headers.authorization?.split(' ')[1]
 	try {
 		if (!token) {
