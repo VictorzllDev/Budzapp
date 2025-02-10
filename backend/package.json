@@ -21,11 +21,14 @@
 		"typescript": "^5.7.3"
 	},
 	"dependencies": {
+		"@aws-sdk/client-s3": "^3.744.0",
+		"@aws-sdk/s3-request-presigner": "^3.744.0",
 		"@fastify/cors": "^10.0.2",
 		"@prisma/client": "^6.3.1",
 		"bcrypt": "^5.1.1",
 		"fastify": "^5.2.1",
 		"jsonwebtoken": "^9.0.2",
+		"uuid": "^11.0.5",
 		"zod": "^3.24.1"
 	}
 }
