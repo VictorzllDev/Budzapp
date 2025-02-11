@@ -51,3 +51,6 @@ Metodologia ágil com fluxo Kanban adaptado para desenvolvimento solo:
 3. **Testes:** Ciclos rápidos de validação das funcionalidades
 4. **Lançamento do MVP:** Coleta de feedback dos primeiros usuários
 5. **Iterações:** Melhorias contínuas baseadas em métricas e feedback
+ 
+## License  
+This project is licensed under the **MIT (Modified for Non-Commercial Use)**. See the [LICENSE](./LICENSE) file for details.
