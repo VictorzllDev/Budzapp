@@ -12,8 +12,7 @@ export function handleApiErrorUtil(error: unknown) {
 		typeof error.response.data === 'object' &&
 		'message' in error.response.data
 	) {
-		const errorMessage = (error as { response: { data: { message: string } } })
-			.response.data.message
+		const errorMessage = (error as { response: { data: { message: string } } }).response.data.message
 		return notifications.show({
 			color: 'red',
 			title: 'Error',

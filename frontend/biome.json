@@ -27,7 +27,8 @@
 			"semicolons": "asNeeded",
 			"quoteStyle": "single",
 			"arrowParentheses": "always",
-			"bracketSpacing": true
+			"bracketSpacing": true,
+			"lineWidth": 120
 		}
 	}
 }

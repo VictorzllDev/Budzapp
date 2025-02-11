@@ -1,15 +1,4 @@
-import {
-	Anchor,
-	Button,
-	Checkbox,
-	Container,
-	Group,
-	Paper,
-	PasswordInput,
-	Text,
-	TextInput,
-	Title,
-} from '@mantine/core'
+import { Anchor, Button, Checkbox, Container, Group, Paper, PasswordInput, Text, TextInput, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useAuth } from '../../hooks/useAuth'
 import { handleApiErrorUtil } from '../../utils/error-handler.util'

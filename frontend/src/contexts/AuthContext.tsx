@@ -6,10 +6,7 @@ interface AuthContextType {
 	isAuthenticated: boolean
 	isLoading: boolean
 	logout: () => void
-	login: ({
-		email,
-		password,
-	}: { email: string; password: string }) => Promise<void>
+	login: ({ email, password }: { email: string; password: string }) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -44,10 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		})
 	}
 
-	const login = async ({
-		email,
-		password,
-	}: { email: string; password: string }) => {
+	const login = async ({ email, password }: { email: string; password: string }) => {
 		const { token } = await loginAuth({ email, password })
 
 		sessionStorage.removeItem('token')
@@ -62,9 +56,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		})
 	}
 
-	return (
-		<AuthContext.Provider value={{ isAuthenticated, isLoading, logout, login }}>
-			{children}
-		</AuthContext.Provider>
-	)
+	return <AuthContext.Provider value={{ isAuthenticated, isLoading, logout, login }}>{children}</AuthContext.Provider>
 }

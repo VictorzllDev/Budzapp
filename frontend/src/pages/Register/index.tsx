@@ -1,13 +1,4 @@
-import {
-	Anchor,
-	Button,
-	Container,
-	Paper,
-	PasswordInput,
-	Text,
-	TextInput,
-	Title,
-} from '@mantine/core'
+import { Anchor, Button, Container, Paper, PasswordInput, Text, TextInput, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { Link, useNavigate } from 'react-router'
@@ -27,15 +18,11 @@ export function Register() {
 
 		validate: {
 			email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Email inválido'),
-			password: (value) =>
-				value.length >= 6 && value.length <= 20 ? null : 'Senha inválida',
+			password: (value) => (value.length >= 6 && value.length <= 20 ? null : 'Senha inválida'),
 		},
 	})
 
-	const handleSubmit = async ({
-		email,
-		password,
-	}: { email: string; password: string }) => {
+	const handleSubmit = async ({ email, password }: { email: string; password: string }) => {
 		try {
 			await registerAuth({ email, password })
 
