@@ -1,0 +1,14 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	& > div {
+		padding: 6px;
+		height: 100%;
+
+		& > img {
+			height: 100%;
+		}
+	}
+}
