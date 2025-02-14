@@ -27,7 +27,7 @@ O MVP focará nas funcionalidades essenciais para testar a viabilidade do projet
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Frontend:** React + Vite + Mantine
+- **Frontend:** React + Vite + Tailwindcss + Shadnc/iu
 - **Backend:** Node.js + TypeScript + Fastify
 - **Banco de Dados:** PostgreSQL + Prisma ORM
 - **Autenticação:** JWT (JSON Web Tokens)
