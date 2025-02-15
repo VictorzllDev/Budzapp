@@ -1,4 +1,4 @@
-import { AppShell, Burger, Flex, Text } from '@mantine/core'
+import { AppShell, Burger, Flex, Text, Container } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconReceipt2, IconShoppingCart } from '@tabler/icons-react'
 import { Outlet } from 'react-router'
@@ -41,7 +41,9 @@ export function AutenticatedLayout() {
 				</Navbar.Root>
 			</AppShell.Navbar>
 			<AppShell.Main>
-				<Outlet />
+				<Container>
+					<Outlet />
+				</Container>
 			</AppShell.Main>
 		</AppShell>
 	)
