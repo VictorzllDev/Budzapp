@@ -1,10 +1,13 @@
 import { createBrowserRouter } from 'react-router'
-import { Home } from '../pages/Home'
+import { Dashboard } from '../pages/Dashboard'
 import { Login } from '../pages/Login'
 import { NotFound } from '../pages/NotFound'
 import { Register } from '../pages/Register'
 import { ProtectedRoute } from './ProtectedRoute'
 import { RedirectIfLoggedIn } from './RedirectIfLoggedIn'
+import { PrivateLayout } from '../pages/_layouts/PrivateLayout'
+import { Products } from '../pages/Products'
+import { Settings } from '../pages/Settings'
 
 export const router = createBrowserRouter([
 	{
@@ -13,7 +16,21 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <ProtectedRoute element={<Home />} />,
+				element: <ProtectedRoute element={<PrivateLayout />} />,
+				children: [
+					{
+						path: '/',
+						element: <Dashboard />,
+					},
+					{
+						path: '/products',
+						element: <Products />,
+					},
+					{
+						path: '/settings',
+						element: <Settings />,
+					},
+				],
 			},
 			{
 				path: '/register',
