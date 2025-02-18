@@ -27,7 +27,7 @@ O MVP focará nas funcionalidades essenciais para testar a viabilidade do projet
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Frontend:** React + Vite + Mantine
+- **Frontend:** React + Vite + Mantine IU + React Query
 - **Backend:** Node.js + TypeScript + Fastify
 - **Banco de Dados:** PostgreSQL + Prisma ORM
 - **Autenticação:** JWT (JSON Web Tokens)
@@ -51,6 +51,6 @@ Metodologia ágil com fluxo Kanban adaptado para desenvolvimento solo:
 3. **Testes:** Ciclos rápidos de validação das funcionalidades
 4. **Lançamento do MVP:** Coleta de feedback dos primeiros usuários
 5. **Iterações:** Melhorias contínuas baseadas em métricas e feedback
- 
-## License  
+
+## License
 This project is licensed under the **MIT (Modified for Non-Commercial Use)**. See the [LICENSE](./LICENSE) file for details.
