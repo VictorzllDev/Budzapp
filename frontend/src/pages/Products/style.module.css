@@ -1,0 +1,9 @@
+.buttonOpenModal {
+	padding: 4px;
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	border-radius: 100%;
+}
