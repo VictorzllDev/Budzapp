@@ -15,6 +15,9 @@ export function productRoutes(app: FastifyTypeInstace) {
 			schema: {
 				tags: ['product'],
 				description: 'Create new product',
+				headers: z.object({
+					authorization: z.string(),
+				}),
 				body: z.object({
 					name: z.string(),
 					description: z.string(),
@@ -125,6 +128,9 @@ export function productRoutes(app: FastifyTypeInstace) {
 			schema: {
 				tags: ['product'],
 				description: 'Delete product by id',
+				headers: z.object({
+					authorization: z.string(),
+				}),
 				params: z.object({
 					id: z.string(),
 				}),
