@@ -13,7 +13,7 @@ export function productRoutes(app: FastifyTypeInstace) {
 		{
 			preHandler: validateTokenMiddleware,
 			schema: {
-				tags: ['product'],
+				tags: ['Products'],
 				description: 'Create new product',
 				headers: z.object({
 					authorization: z.string(),
@@ -72,7 +72,7 @@ export function productRoutes(app: FastifyTypeInstace) {
 		'/:companyId',
 		{
 			schema: {
-				tags: ['product'],
+				tags: ['Products'],
 				description: 'Get all products by company id',
 				params: z.object({
 					companyId: z.string(),
@@ -126,7 +126,7 @@ export function productRoutes(app: FastifyTypeInstace) {
 		{
 			preHandler: validateTokenMiddleware,
 			schema: {
-				tags: ['product'],
+				tags: ['Products'],
 				description: 'Delete product by id',
 				headers: z.object({
 					authorization: z.string(),

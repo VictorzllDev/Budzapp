@@ -11,7 +11,7 @@ export function authRoutes(app: FastifyTypeInstace) {
 		'/register',
 		{
 			schema: {
-				tags: ['auth'],
+				tags: ['Auth'],
 				description: 'Register new user',
 				body: z.object({
 					email: z.string().email(),
@@ -57,7 +57,7 @@ export function authRoutes(app: FastifyTypeInstace) {
 		'/login',
 		{
 			schema: {
-				tags: ['auth'],
+				tags: ['Auth'],
 				description: 'Login user',
 				body: z.object({
 					email: z.string().email(),
@@ -105,7 +105,7 @@ export function authRoutes(app: FastifyTypeInstace) {
 		'/validate',
 		{
 			schema: {
-				tags: ['auth'],
+				tags: ['Auth'],
 				description: 'Validate token',
 				headers: z.object({
 					authorization: z.string(),
