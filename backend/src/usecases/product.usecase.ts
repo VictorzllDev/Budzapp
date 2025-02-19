@@ -9,6 +9,7 @@ import type {
 	IProductUseCase,
 } from '../types/product.types'
 import { r2 } from '../utils/cloudflare-client.util'
+import { HttpError } from '../utils/http-error.util'
 
 export class ProductUseCase implements IProductUseCase {
 	constructor(private productRepository: IProductRepository) {}
@@ -52,10 +53,10 @@ export class ProductUseCase implements IProductUseCase {
 
 	async deleteById(id: string, companyId: string): Promise<void> {
 		const product = await this.productRepository.getById(id)
-		if (!product) throw new Error('Produto não encontrado')
+		if (!product) throw new HttpError('Produto não encontrado', 404)
 
 		if (product.companyId !== companyId) {
-			throw new Error('Você não está autorizado a excluir este produto')
+			throw new HttpError('Você não está autorizado a excluir este produto', 403)
 		}
 
 		await this.productRepository.deleteById(id)
