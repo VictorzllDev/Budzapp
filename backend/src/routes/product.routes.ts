@@ -3,6 +3,7 @@ import { validateTokenMiddleware } from '../middlewares/validate-token.middlewar
 import { ProductRepository } from '../repositories/product.repository'
 import type { FastifyTypeInstace } from '../types/fastify.types'
 import { ProductUseCase } from '../usecases/product.usecase'
+import { HttpError } from '../utils/http-error.util'
 
 const productUseCase = new ProductUseCase(new ProductRepository())
 
@@ -18,7 +19,7 @@ export function productRoutes(app: FastifyTypeInstace) {
 					name: z.string(),
 					description: z.string(),
 					price: z.number(),
-					contentType: z.string().regex(/image\/(png|jpg|jpeg)/),
+					contentType: z.enum(['image/png', 'image/jpeg', 'image/jpg']),
 				}),
 				response: {
 					201: z.object({
@@ -34,7 +35,15 @@ export function productRoutes(app: FastifyTypeInstace) {
 						}),
 						signedUrl: z.string(),
 					}),
-					500: z.unknown(),
+					400: z
+						.object({
+							statusCode: z.number(),
+							code: z.string(),
+							error: z.string(),
+							message: z.string(),
+						})
+						.or(z.unknown()),
+					500: z.null(),
 				},
 			},
 		},
@@ -45,16 +54,12 @@ export function productRoutes(app: FastifyTypeInstace) {
 				reply.status(201).send(result)
 			} catch (error) {
 				if (error instanceof ZodError) {
-					reply.status(400).send({
-						message: 'Validation failed',
-						errors: error.errors.map((e) => ({
-							message: e.message,
-							path: e.path,
-						})),
-					})
+					reply.status(400).send(error)
+				} else if (error instanceof HttpError) {
+					reply.status(error.statusCode).send({ message: error.message })
 				} else {
 					console.log(error)
-					reply.status(500).send(error)
+					reply.status(500).send(null)
 				}
 			}
 		},
@@ -82,7 +87,15 @@ export function productRoutes(app: FastifyTypeInstace) {
 							companyId: z.string(),
 						}),
 					),
-					500: z.unknown(),
+					400: z
+						.object({
+							statusCode: z.number(),
+							code: z.string(),
+							error: z.string(),
+							message: z.string(),
+						})
+						.or(z.unknown()),
+					500: z.null(),
 				},
 			},
 		},
@@ -94,16 +107,12 @@ export function productRoutes(app: FastifyTypeInstace) {
 				reply.status(200).send(result)
 			} catch (error) {
 				if (error instanceof ZodError) {
-					reply.status(400).send({
-						message: 'Validation failed',
-						errors: error.errors.map((e) => ({
-							message: e.message,
-							path: e.path,
-						})),
-					})
+					reply.status(400).send(error)
+				} else if (error instanceof HttpError) {
+					reply.status(error.statusCode).send({ message: error.message })
 				} else {
 					console.log(error)
-					reply.status(500).send(error)
+					reply.status(500).send(null)
 				}
 			}
 		},
@@ -120,8 +129,23 @@ export function productRoutes(app: FastifyTypeInstace) {
 					id: z.string(),
 				}),
 				response: {
-					204: z.void(),
-					500: z.unknown(),
+					204: z.null(),
+					400: z
+						.object({
+							statusCode: z.number(),
+							code: z.string(),
+							error: z.string(),
+							message: z.string(),
+						})
+						.or(z.unknown()),
+					403: z.object({
+						message: z.string(),
+					}),
+					404: z.object({
+						message: z.string(),
+					}),
+
+					500: z.null(),
 				},
 			},
 		},
@@ -130,20 +154,16 @@ export function productRoutes(app: FastifyTypeInstace) {
 				const { id } = req.params
 				const companyId = req.company.id
 
-				const result = await productUseCase.deleteById(id, companyId)
-				reply.code(204).send(result)
+				await productUseCase.deleteById(id, companyId)
+				reply.code(204).send(null)
 			} catch (error) {
 				if (error instanceof ZodError) {
-					reply.status(400).send({
-						message: 'Validation failed',
-						errors: error.errors.map((e) => ({
-							message: e.message,
-							path: e.path,
-						})),
-					})
+					reply.status(400).send(error)
+				} else if (error instanceof HttpError) {
+					reply.status(error.statusCode).send({ message: error.message })
 				} else {
 					console.log(error)
-					reply.status(500).send(error)
+					reply.status(500).send(null)
 				}
 			}
 		},
