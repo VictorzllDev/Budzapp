@@ -33,3 +33,13 @@ export async function createProduct({ name, description, price, image }: ICreate
 
 	return product
 }
+
+export interface IGetProductsProps {
+	companyId: string
+}
+
+export async function getProducts({ companyId }: IGetProductsProps) {
+	const { data } = await apiClientService.get<IProduct[]>(`/product/${companyId}`)
+
+	return data
+}

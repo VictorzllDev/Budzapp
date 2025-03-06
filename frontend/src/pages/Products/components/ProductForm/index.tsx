@@ -1,5 +1,5 @@
 import { Button, FileInput, Group, NumberInput, Space, TextInput } from '@mantine/core'
-import { useCreateProduct } from '../hooks/useCreateProduct'
+import { useCreateProduct } from '../../hooks/useCreateProduct'
 
 export interface IProductFormProps {
 	onCloseModal: () => void

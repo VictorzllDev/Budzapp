@@ -20,7 +20,15 @@ export function handleApiErrorUtil(error: unknown) {
 		})
 	}
 
-	notifications.show({
+	if (error instanceof Error) {
+		return notifications.show({
+			color: 'red',
+			title: 'Error',
+			message: error.message,
+		})
+	}
+
+	return notifications.show({
 		message: 'Ocorreu um erro inesperado. Tente novamente.',
 	})
 }

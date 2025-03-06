@@ -4,12 +4,11 @@ import './index.css'
 
 import { MantineProvider } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider } from 'react-router'
 import { AuthProvider } from './contexts/AuthContext'
 import { router } from './router/'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const queryClient = new QueryClient()
+import { queryClient } from './utils/query-client.util'
 
 export function App() {
 	return (
