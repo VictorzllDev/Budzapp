@@ -2,8 +2,8 @@ import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createProduct } from '../../../services/product.service'
+import type { IProduct } from '../../../types/product.types'
 import { handleApiErrorUtil } from '../../../utils/error-handler.util'
-import { IProduct } from '../../../types/product.types'
 
 export function useCreateProduct() {
 	const queryClient = useQueryClient()

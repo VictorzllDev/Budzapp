@@ -1,5 +1,6 @@
 import { Button, FileInput, Group, NumberInput, Space, TextInput } from '@mantine/core'
 import { useCreateProduct } from '../../hooks/useCreateProduct'
+import { useEffect } from 'react'
 
 export interface IProductFormProps {
 	onCloseModal: () => void
@@ -8,7 +9,11 @@ export interface IProductFormProps {
 export function ProductForm({ onCloseModal }: IProductFormProps) {
 	const { form, mutate, isPending, isSuccess } = useCreateProduct()
 
-	if (isSuccess) onCloseModal()
+	useEffect(() => {
+		if (isSuccess) {
+			onCloseModal()
+		}
+	}, [isSuccess, onCloseModal])
 
 	return (
 		<form onSubmit={form.onSubmit((values) => mutate(values))}>
