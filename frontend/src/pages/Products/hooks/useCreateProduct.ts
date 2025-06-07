@@ -14,7 +14,7 @@ export function useCreateProduct() {
 			name: '',
 			description: '',
 			price: 0,
-			image: null,
+			image: null as unknown as File,
 		},
 
 		validate: {
