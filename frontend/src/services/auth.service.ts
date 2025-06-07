@@ -1,5 +1,9 @@
 import { apiClientService } from './api-client.service'
 
+export interface IPayloadJWT {
+	id: string
+}
+
 // Create a new user - register
 interface IRegisterRequest {
 	email: string
