@@ -11,9 +11,11 @@ import {
 	useModalsStack,
 } from '@mantine/core'
 import { IconTrash } from '@tabler/icons-react'
+import { useState } from 'react'
+import { PageLoader } from '../../../../components/PageLoader'
 import { env } from '../../../../env'
-import classes from './style.module.css'
 import { useDeleteProduct } from '../../hooks/useDeleteProduct'
+import classes from './style.module.css'
 
 export interface IProductCardProps {
 	id: string
@@ -24,6 +26,9 @@ export interface IProductCardProps {
 }
 
 export function ProductCard({ id, name, description, price, filePath }: IProductCardProps) {
+	const [isImageLoading, setIsImageLoading] = useState(true)
+	const [hasError, setHasError] = useState(false)
+
 	const { mutate, isPending } = useDeleteProduct()
 
 	const stack = useModalsStack(['delete-product'])
@@ -32,12 +37,31 @@ export function ProductCard({ id, name, description, price, filePath }: IProduct
 		<>
 			<Card withBorder radius="md" p="md" mx="auto" className={classes.card}>
 				<Card.Section>
+					{isImageLoading && !hasError && (
+						<div
+							style={{
+								height: 180,
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<PageLoader />
+						</div>
+					)}
+
 					<Image
 						src={`${env.VITE_URL_BUCKET}/${filePath}`}
 						alt={name}
 						height={180}
-						fit="fill"
+						fit="cover"
 						fallbackSrc="https://placehold.co/600x400?text=Error 404"
+						onLoad={() => setIsImageLoading(false)}
+						onError={() => {
+							setIsImageLoading(false)
+							setHasError(true)
+						}}
+						style={{ display: isImageLoading ? 'none' : 'block' }}
 					/>
 					<Divider />
 				</Card.Section>
