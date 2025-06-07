@@ -36,7 +36,7 @@ export function PrivateLayout() {
 				</Group>
 			</AppShell.Header>
 
-			<AppShell.Navbar bd={0}>
+			<AppShell.Navbar bd={0} w={'100%'} maw={300}>
 				<Navbar.Root>
 					<Navbar.Main>
 						<Navbar.Header />
