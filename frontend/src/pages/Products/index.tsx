@@ -27,7 +27,9 @@ export function Products() {
 						.slice(0)
 						.reverse()
 						.map(({ id, name, description, price, filePath }) => {
-							return <ProductCard key={id} name={name} description={description} price={price} filePath={filePath} />
+							return (
+								<ProductCard key={id} id={id} name={name} description={description} price={price} filePath={filePath} />
+							)
 						})}
 				</SimpleGrid>
 			</Container>

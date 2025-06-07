@@ -42,3 +42,7 @@ export async function getProducts({ companyId }: IGetProductsProps) {
 
 	return data
 }
+
+export async function deleteProduct(id: string): Promise<void> {
+	await apiClientService.delete(`/product/${id}`)
+}
