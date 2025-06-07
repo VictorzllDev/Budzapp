@@ -23,7 +23,6 @@ export async function createProduct({ name, description, price, image }: ICreate
 		price,
 		contentType: image.type,
 	})
-	console.log(product, signedUrl)
 
 	await axios.put(signedUrl, image, {
 		headers: {
