@@ -1,4 +1,4 @@
-import { PutObjectCommand } from '@aws-sdk/client-s3'
+import { DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { v4 as uuid } from 'uuid'
 import type {
@@ -58,6 +58,13 @@ export class ProductUseCase implements IProductUseCase {
 		if (product.companyId !== companyId) {
 			throw new HttpError('Você não está autorizado a excluir este produto', 403)
 		}
+
+		await r2.send(
+			new DeleteObjectCommand({
+				Bucket: 'budzapp-dev',
+				Key: product.filePath,
+			}),
+		)
 
 		await this.productRepository.deleteById(id)
 	}
