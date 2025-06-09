@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"main": "dist/index.js",
 	"author": "VictorzllDev",
-	"license": "MIT-Modified",
+	"license": "MIT",
 	"scripts": {
 		"start": "node --env-file=.env dist/index.js",
 		"dev": "tsx watch --env-file=.env src/index.ts",
