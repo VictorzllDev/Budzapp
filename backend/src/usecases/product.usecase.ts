@@ -1,6 +1,7 @@
 import { DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { v4 as uuid } from 'uuid'
+import { env } from '../env'
 import type {
 	ICreateProductRequest,
 	ICreateProductResponse,
@@ -26,7 +27,7 @@ export class ProductUseCase implements IProductUseCase {
 		const signedUrl = await getSignedUrl(
 			r2,
 			new PutObjectCommand({
-				Bucket: 'budzapp-dev',
+				Bucket: env.CLOUDFLARE_BUCKET,
 				Key: filePath,
 				ContentType: contentType,
 			}),
@@ -61,7 +62,7 @@ export class ProductUseCase implements IProductUseCase {
 
 		await r2.send(
 			new DeleteObjectCommand({
-				Bucket: 'budzapp-dev',
+				Bucket: env.CLOUDFLARE_BUCKET,
 				Key: product.filePath,
 			}),
 		)
